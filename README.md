@@ -1,46 +1,77 @@
 # Cliente ZeroDeska - Ravinia Amorim
 
-Projeto Next.js para a VSL do produto "De 0 a 10k" da Ravinia Amorim.
+VSL (Video Sales Letter) para o produto "De 0 a 10k" - Método para crescer Instagram de 0 a 10k seguidores.
 
-## 🚀 Como executar
+## 🚀 Deploy no GitHub Pages
 
-1. Instale as dependências:
+### Passo 1: Criar repositório no GitHub
+
+1. Acesse: https://github.com/new
+2. Nome do repositório: `cliente_zerodeska`
+3. Deixe **privado** ou **público** (sua escolha)
+4. **NÃO** marque "Initialize with README"
+5. Clique em "Create repository"
+
+### Passo 2: Conectar ao GitHub
+
+Execute no terminal:
+
 ```bash
+cd /Users/viniciusfontes/Documents/Projetos/Scripts/zerodeska/cliente_zerodeska
+
+# Adicionar remote (substitua SEU_USUARIO pelo seu usuário do GitHub)
+git remote add origin https://github.com/SEU_USUARIO/cliente_zerodeska.git
+
+# Fazer push
+git push -u origin main
+```
+
+### Passo 3: Ativar GitHub Pages
+
+1. No repositório GitHub, vá em **Settings** → **Pages**
+2. Em **Source**, selecione **"GitHub Actions"**
+3. O workflow vai fazer o deploy automaticamente após o primeiro push
+
+### Passo 4: Acessar sua VSL
+
+Após o deploy (pode levar alguns minutos), sua VSL estará disponível em:
+
+- **GitHub Pages**: `https://SEU_USUARIO.github.io/cliente_zerodeska/vsl`
+- **Domínio customizado**: `raviniamorim.com.br/vsl` (após configurar DNS)
+
+## 📝 Configurações Necessárias
+
+1. **Meta Pixel**: Substitua `SEU_PIXEL_ID_AQUI` em `app/vsl/page.tsx` pelo ID do seu Meta Pixel
+2. **VTURB Video**: Quando o vídeo estiver pronto, atualize `videoId` e `playerScriptUrl` em `app/vsl/components/VideoPlayer.tsx`
+
+## 🛠️ Desenvolvimento Local
+
+```bash
+# Instalar dependências
 npm install
-```
 
-2. Execute o servidor de desenvolvimento:
-```bash
+# Rodar em desenvolvimento
 npm run dev
+
+# Acessar: http://localhost:3000/vsl
 ```
 
-3. Acesse a VSL em:
-```
-http://localhost:3000/vsl
-```
-
-## 📝 Configurações necessárias
-
-1. **Meta Pixel**: Substitua `SEU_PIXEL_ID_AQUI` no arquivo `app/vsl/page.tsx` pelo ID do seu Meta Pixel do Facebook.
-
-2. **VTURB Video**: Quando o vídeo estiver pronto no VTURB, atualize os seguintes valores no arquivo `app/vsl/components/VideoPlayer.tsx`:
-   - `videoId`: ID do vídeo no VTURB
-   - `playerScriptUrl`: URL do script do player do VTURB
-
-## 🌐 Deploy
-
-O projeto está configurado para ser acessível em `raviniamorim.com.br/vsl` após o deploy.
-
-## 📁 Estrutura do projeto
+## 📁 Estrutura
 
 ```
 app/
-  ├── layout.tsx          # Layout raiz
-  ├── globals.css          # Estilos globais
   └── vsl/
-      ├── page.tsx         # Página da VSL
-      ├── styles.css       # Estilos da VSL
+      ├── page.tsx          # Página da VSL
+      ├── styles.css         # Estilos
       └── components/
-          ├── VideoPlayer.tsx   # Componente do player VTURB
-          └── FormModal.tsx     # Modal de captura de leads
+          ├── VideoPlayer.tsx   # Player VTURB
+          └── FormModal.tsx     # Modal de captura
 ```
+
+## 🌐 Domínio Customizado
+
+Para usar `raviniamorim.com.br/vsl`:
+
+1. Configure o DNS do domínio apontando para GitHub Pages
+2. No GitHub Pages Settings, adicione o domínio customizado
+3. O Next.js já está configurado para funcionar com o domínio
