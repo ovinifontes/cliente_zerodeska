@@ -149,7 +149,7 @@ function startRedirectCountdown() {
     let seconds = 5;
     const countdownElement = document.getElementById('redirectCountdown');
     const secondsElement = document.getElementById('redirectSeconds');
-    const whatsappLink = 'https://chat.whatsapp.com/J401aAtX0LbAFHzxwGbSf7';
+    const whatsappLink = 'https://chat.whatsapp.com/HLs2teiUX84C9EfxS2orj7';
     
     if (countdownElement) countdownElement.textContent = seconds;
     if (secondsElement) secondsElement.textContent = seconds;
