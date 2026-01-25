@@ -1,77 +1,74 @@
 # Cliente ZeroDeska - Ravinia Amorim
 
-VSL (Video Sales Letter) para o produto "De 0 a 10k" - Método para crescer Instagram de 0 a 10k seguidores.
+Páginas estáticas hospedadas no GitHub Pages para o produto "De 0 a 10k" e "Jornada da Prosperidade".
+
+## 🌐 URLs Publicadas
+
+- **Página Principal**: [raviniamorim.com.br](https://raviniamorim.com.br)
+- **VSL (Video Sales Letter)**: [raviniamorim.com.br/vsl](https://raviniamorim.com.br/vsl)
+- **Página de Interesse**: [raviniamorim.com.br/interesse](https://raviniamorim.com.br/interesse)
+
+## 📁 Estrutura do Projeto
+
+```
+cliente_zerodeska/
+├── .gitignore
+├── CNAME                    # Configuração do domínio customizado
+├── README.md
+├── index.html               # Página principal
+├── vsl/                     # VSL - De 0 a 10k
+│   ├── index.html
+│   ├── script.js
+│   └── styles.css
+└── interesse/               # Página de interesse - Jornada da Prosperidade
+    ├── index.html
+    ├── script.js
+    ├── styles.css
+    ├── images/
+    └── agradecimento/
+        ├── index.html
+        └── styles.css
+```
 
 ## 🚀 Deploy no GitHub Pages
 
-### Passo 1: Criar repositório no GitHub
+Este projeto usa GitHub Pages com HTML estático. Para fazer deploy:
 
-1. Acesse: https://github.com/new
-2. Nome do repositório: `cliente_zerodeska`
-3. Deixe **privado** ou **público** (sua escolha)
-4. **NÃO** marque "Initialize with README"
-5. Clique em "Create repository"
+1. Faça commit e push das alterações:
+   ```bash
+   git add .
+   git commit -m "Atualização"
+   git push origin main
+   ```
 
-### Passo 2: Conectar ao GitHub
+2. O GitHub Pages publica automaticamente a partir da branch `main`
 
-Execute no terminal:
+3. O domínio customizado está configurado via arquivo `CNAME`
 
-```bash
-cd /Users/viniciusfontes/Documents/Projetos/Scripts/zerodeska/cliente_zerodeska
+## 📝 Configurações
 
-# Adicionar remote (substitua SEU_USUARIO pelo seu usuário do GitHub)
-git remote add origin https://github.com/SEU_USUARIO/cliente_zerodeska.git
+### Meta Pixel
+- **VSL**: ID `1917254782203311` configurado em `vsl/index.html`
+- **Interesse**: ID `1837527450261242` configurado em `interesse/index.html`
 
-# Fazer push
-git push -u origin main
-```
-
-### Passo 3: Ativar GitHub Pages
-
-1. No repositório GitHub, vá em **Settings** → **Pages**
-2. Em **Source**, selecione **"GitHub Actions"**
-3. O workflow vai fazer o deploy automaticamente após o primeiro push
-
-### Passo 4: Acessar sua VSL
-
-Após o deploy (pode levar alguns minutos), sua VSL estará disponível em:
-
-- **GitHub Pages**: `https://SEU_USUARIO.github.io/cliente_zerodeska/vsl`
-- **Domínio customizado**: `raviniamorim.com.br/vsl` (após configurar DNS)
-
-## 📝 Configurações Necessárias
-
-1. **Meta Pixel**: Substitua `SEU_PIXEL_ID_AQUI` em `app/vsl/page.tsx` pelo ID do seu Meta Pixel
-2. **VTURB Video**: Quando o vídeo estiver pronto, atualize `videoId` e `playerScriptUrl` em `app/vsl/components/VideoPlayer.tsx`
+### Integrações
+- **VSL**: Integração com VTURB para player de vídeo
+- **Interesse**: Integração com Supabase para captura de leads (`interesse/script.js`)
 
 ## 🛠️ Desenvolvimento Local
 
+Como são páginas HTML estáticas, você pode abrir diretamente no navegador ou usar um servidor local simples:
+
 ```bash
-# Instalar dependências
-npm install
+# Usando Python
+python3 -m http.server 8000
 
-# Rodar em desenvolvimento
-npm run dev
+# Usando Node.js (http-server)
+npx http-server -p 8000
 
-# Acessar: http://localhost:3000/vsl
+# Acessar: http://localhost:8000
 ```
 
-## 📁 Estrutura
+## 📄 Licença
 
-```
-app/
-  └── vsl/
-      ├── page.tsx          # Página da VSL
-      ├── styles.css         # Estilos
-      └── components/
-          ├── VideoPlayer.tsx   # Player VTURB
-          └── FormModal.tsx     # Modal de captura
-```
-
-## 🌐 Domínio Customizado
-
-Para usar `raviniamorim.com.br/vsl`:
-
-1. Configure o DNS do domínio apontando para GitHub Pages
-2. No GitHub Pages Settings, adicione o domínio customizado
-3. O Next.js já está configurado para funcionar com o domínio
+Projeto privado - Ravinia Amorim
