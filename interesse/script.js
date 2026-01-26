@@ -132,12 +132,12 @@ async function processFormSubmission(nomeElementId, telefoneElementId, formEleme
         }
         
         // REDIRECIONAR PARA PÁGINA DE AGRADECIMENTO
-        window.location.href = 'https://raviniamorim.com.br/interesse/agradecimento';
+        window.location.href = 'https://joaoviral.com.br/interesse/agradecimento';
         
     } catch (error) {
         console.error('Erro ao processar formulário:', error);
         // Mesmo com erro, redirecionar para não bloquear o usuário
-        window.location.href = 'https://raviniamorim.com.br/interesse/agradecimento';
+        window.location.href = 'https://joaoviral.com.br/interesse/agradecimento';
     }
     
     return true;
