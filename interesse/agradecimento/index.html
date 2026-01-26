@@ -16,6 +16,7 @@
     
     Exemplo de código do Meta Pixel:
     
+    <!— Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -25,13 +26,14 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'SEU_PIXEL_ID_AQUI');
+    fbq('init', '2089557455153963');
     fbq('track', 'PageView');
+    fbq('track', 'Search');
     </script>
-    <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1"/>
-    </noscript>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2089557455153963&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code —>
     -->
     
     <link rel="stylesheet" href="styles.css">
