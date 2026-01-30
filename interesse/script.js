@@ -11,35 +11,62 @@ if (window.__scriptGiovanniLoaded) {
 async function trySaveToSupabase(nome, telefone) {
     console.log('=== TENTANDO SALVAR NO SUPABASE ===');
     console.log('Dados:', { nome, telefone });
+    console.log('Nome da tabela: interesse_0a10k');
+    
+    // Verificar se o Supabase está disponível
+    if (!window.supabase) {
+        console.error('❌ Supabase SDK não foi carregado!');
+        throw new Error('Supabase SDK não disponível');
+    }
     
     // Usar o cliente que foi criado no HTML
-    const cliente = window.supabaseClient;
+    let clienteFinal = window.supabaseClient;
     
-    console.log('Cliente Supabase disponível?', !!cliente);
+    console.log('Cliente Supabase disponível?', !!clienteFinal);
+    console.log('window.supabase:', typeof window.supabase);
+    console.log('window.supabaseClient:', clienteFinal);
     
-    let clienteFinal = cliente;
-    
+    // Se não tiver cliente, tentar criar
     if (!clienteFinal) {
-        console.log('⚠️ Supabase não disponível, aguardando...');
-        console.log('window.supabaseClient:', window.supabaseClient);
-        // Aguardar um pouco para garantir que o cliente seja criado
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        clienteFinal = window.supabaseClient;
+        console.log('⚠️ Cliente não encontrado, tentando criar...');
+        
+        // Aguardar um pouco para garantir que o SDK seja carregado
+        for (let i = 0; i < 5; i++) {
+            await new Promise(resolve => setTimeout(resolve, 500));
+            if (window.supabase && typeof window.supabase.createClient === 'function') {
+                const SUPABASE_URL = 'https://ttzgmysucadmcfjulpbj.supabase.co';
+                const SUPABASE_ANON_KEY = 'sb_publishable__ZjzsgvsMc825HGkRUZ3cQ_KcPiKPZ7';
+                clienteFinal = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                window.supabaseClient = clienteFinal;
+                console.log('✅ Cliente criado na tentativa', i + 1);
+                break;
+            }
+        }
+        
         if (!clienteFinal) {
-            throw new Error('Supabase não disponível após tentativa');
+            console.error('❌ Não foi possível criar o cliente Supabase após 5 tentativas');
+            throw new Error('Supabase não disponível após tentativas');
         }
     }
     
     console.log('Enviando dados para Supabase...');
+    console.log('Tabela: interesse_0a10k');
+    console.log('Payload:', { nome, telefone });
+    
     const { data, error } = await clienteFinal
         .from('interesse_0a10k')
         .insert([{ nome, telefone }]);
     
     if (error) {
-        console.error('❌ ERRO ao salvar no Supabase:', error);
+        console.error('❌ ERRO ao salvar no Supabase:');
         console.error('Código:', error.code);
         console.error('Mensagem:', error.message);
         console.error('Detalhes:', error.details);
+        console.error('Hint:', error.hint);
+        console.error('Erro completo:', JSON.stringify(error, null, 2));
+        
+        // Mostrar erro mais amigável
+        alert('Erro ao salvar: ' + error.message + '. Verifique o console para mais detalhes.');
         throw error;
     }
     
@@ -60,6 +87,33 @@ function maskPhone(value) {
         value = value.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
     }
     return value;
+}
+
+// Formatar telefone para salvar no Supabase: 55DD9XXXXXXXX
+function formatPhoneForSupabase(telefone) {
+    if (!telefone) return '';
+    
+    // Remover todos os caracteres não numéricos
+    let numeros = telefone.replace(/\D/g, '');
+    
+    // Se já começar com 55, remover (código do país)
+    if (numeros.startsWith('55')) {
+        numeros = numeros.substring(2);
+    }
+    
+    // Se tiver 9 dígitos (DD + 7 dígitos), adicionar 9 após o DD
+    if (numeros.length === 9) {
+        numeros = numeros.substring(0, 2) + '9' + numeros.substring(2);
+    }
+    // Se tiver 10 dígitos (DD + 8 dígitos), adicionar 9 após o DD
+    else if (numeros.length === 10) {
+        numeros = numeros.substring(0, 2) + '9' + numeros.substring(2);
+    }
+    // Se tiver 11 dígitos (DD + 9 + 8 dígitos), está correto
+    // Se tiver menos de 9, não fazer nada (número inválido)
+    
+    // Adicionar código do país 55 no início
+    return '55' + numeros;
 }
 
 // Scroll até o formulário fixo (função global) - DEFINIDA IMEDIATAMENTE
@@ -117,8 +171,13 @@ async function processFormSubmission(nomeElementId, telefoneElementId, formEleme
     // Não precisa fechar modal, pois não existe mais
     
     try {
-        // Aguardar salvamento no Supabase antes de redirecionar
-        await trySaveToSupabase(nomeValue, telefoneValue);
+        // Formatar telefone para o formato 55DD9XXXXXXXX antes de salvar
+        const telefoneFormatado = formatPhoneForSupabase(telefoneValue);
+        console.log('Telefone original:', telefoneValue);
+        console.log('Telefone formatado para Supabase:', telefoneFormatado);
+        
+        // Aguardar salvamento no Supabase antes de mostrar modal
+        await trySaveToSupabase(nomeValue, telefoneFormatado);
         
         // Disparar evento de conversão do Meta Pixel
         if (typeof fbq !== 'undefined') {
@@ -131,13 +190,41 @@ async function processFormSubmission(nomeElementId, telefoneElementId, formEleme
             formElement.reset();
         }
         
-        // REDIRECIONAR PARA PÁGINA DE AGRADECIMENTO
-        window.location.href = 'https://joaoviral.com.br/interesse/agradecimento';
+        // Mostrar modal de sucesso
+        const successModal = document.getElementById('successModal');
+        if (successModal) {
+            // Ocultar loading indicator
+            const loadingIndicator = successModal.querySelector('.loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
+            
+            successModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Iniciar countdown de redirecionamento
+            startRedirectCountdown();
+        } else {
+            // Se não houver modal, redirecionar diretamente
+            window.location.href = 'https://joaoviral.com.br/interesse/agradecimento';
+        }
         
     } catch (error) {
         console.error('Erro ao processar formulário:', error);
-        // Mesmo com erro, redirecionar para não bloquear o usuário
-        window.location.href = 'https://joaoviral.com.br/interesse/agradecimento';
+        // Mesmo com erro, mostrar modal ou redirecionar
+        const successModal = document.getElementById('successModal');
+        if (successModal) {
+            // Ocultar loading indicator mesmo em caso de erro
+            const loadingIndicator = successModal.querySelector('.loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
+            
+            successModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            startRedirectCountdown();
+        } else {
+            window.location.href = 'https://joaoviral.com.br/interesse/agradecimento';
+        }
     }
     
     return true;
