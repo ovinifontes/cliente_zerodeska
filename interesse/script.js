@@ -131,6 +131,11 @@ function openFormModal() {
     }
 }
 
+// Função scrollToForm (alias para openFormModal)
+function scrollToForm() {
+    openFormModal();
+}
+
 // Fechar modal de sucesso - DEFINIDA IMEDIATAMENTE
 function closeModal() {
     const successModal = document.getElementById('successModal');
@@ -141,6 +146,7 @@ function closeModal() {
 
 // Garantir que funções estejam disponíveis globalmente IMEDIATAMENTE
 window.openFormModal = openFormModal;
+window.scrollToForm = scrollToForm;
 window.closeModal = closeModal;
 
 // Função reutilizável para processar submissão do formulário

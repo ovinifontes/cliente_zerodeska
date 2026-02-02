@@ -14,7 +14,7 @@
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f.fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
@@ -30,74 +30,72 @@
     
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="theme-light">
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <span class="badge">DE 0 A 10K — VISÃO ESTRATÉGICA</span>
-            </div>
-        </div>
-    </header>
+<body class="theme-dark">
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Layout lado a lado -->
     <section class="hero">
-        <div class="hero-image-wrapper">
-            <span class="hero-badge">ENCONTRO AO VIVO | 03/02/2026</span>
-            <img src="images/joao_foto_010k.jpeg" alt="João Viral - De 0 a 10K" class="hero-image">
-        </div>
         <div class="container">
-            <div class="hero-content">
-                <h1>
-                    Se o seu Instagram não gera resultado, o problema não é o algoritmo.
-                </h1>
-
-                <p class="hero-subtitle">
-                    Um encontro ao vivo para <strong>empresários e profissionais liberais</strong> que postam, tentam melhorar, mas continuam sem <strong>clareza</strong> sobre o que funciona — e por quê.
-                    Aqui você vai entender onde a maioria erra ao tentar crescer no Instagram antes de postar mais ou seguir novas tendências.
-                </p>
-
-                <p class="hero-date">📅 <strong>03 de Fevereiro de 2026</strong></p>
-                <p class="hero-date">🕗 <strong>20h (horário de Brasília)</strong></p>
-                <p class="hero-date">🌐 <strong>100% online</strong> | <span>AO VIVO</span></p>
-                
-                <!-- Formulário Fixo dentro da Hero -->
-                <div class="fixed-form-wrapper" id="topo-form">
-                    <h2 class="fixed-form-title" style="text-align: center;">Garanta seu acesso ao encontro ao vivo</h2>
-                    <p class="fixed-form-subtitle">
-                        Esse encontro é para quem já posta, já tentou melhorar, mas sente que ainda está no escuro sobre o que realmente gera resultado no Instagram.
-                    </p>
-
-                    <form id="leadFormFixed">
-                        <div class="form-group">
-                            <input type="text" id="nomeFixed" name="nomeFixed" placeholder="Insira seu nome" required>
-                        </div>
-                        <div class="form-group">
-                            <div class="phone-input">
-                                <div class="phone-prefix">
-                                    <span>🇧🇷</span>
-                                    <span>+55</span>
-                                    <span>▼</span>
-                                </div>
-                                <input type="tel" id="telefoneFixed" name="telefoneFixed" placeholder="(00) 00000-0000" required>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-submit">QUERO ENTENDER ISSO MELHOR</button>
-
-                        <p class="fixed-form-microcopy" style="margin-top:10px; font-size:13px; opacity:0.9; text-align:left;">
-                            🔒 Após a inscrição, você será direcionado para um <strong>grupo de WhatsApp silencioso (somente avisos)</strong>.
-                            <strong>Apenas os administradores</strong> enviam mensagens. É por lá que você receberá o <strong>link do encontro</strong> e os <strong>lembretes</strong>.
-                            <strong>Sem spam. Sem conversa paralela.</strong>
+            <div class="hero-wrapper">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text-content">
+                        <h1 class="hero-title">
+                            <span class="hero-title-badge">Aula ao Vivo para quem posta, mas não cresce</span><br>
+                            DESCUBRA PORQUE SEU CONTEÚDO NÃO CRESCE <strong>MESMO VOCÊ FAZENDO "TUDO CERTO"</strong>
+                        </h1>
+                        
+                        <p class="hero-subtitle">
+                            Nesta Aula ao Vivo, você vai entender por que postar mais, seguir trends ou copiar gurus não resolve e como estruturar seu conteúdo para gerar <strong>atenção, autoridade e vendas</strong>, sem virar influencer forçado ou refém do algoritmo.
                         </p>
-                    </form>
+
+                        <!-- Formulário dentro do Hero -->
+                        <div class="fixed-form-wrapper" id="topo-form">
+                            <form id="leadFormFixed">
+                                <div class="form-group">
+                                    <input type="text" id="nomeFixed" name="nomeFixed" placeholder="Insira seu nome *" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="telefoneFixed" name="telefoneFixed" placeholder="Digite seu WhatsApp *" required>
+                                </div>
+
+                                <button type="submit" class="btn-submit">ENTRAR NA LISTA DA AULA AO VIVO</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image-wrapper">
+                        <span class="hero-badge">ENCONTRO AO VIVO | 03/02/2026</span>
+                        <img src="images/joao_foto_010k.jpeg" alt="João Viral - De 0 a 10K" class="hero-image">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção: O que é esse encontro -->
-    <section class="learn-section">
+    <!-- Countdown Section - Seção separada -->
+    <section class="countdown-section">
+        <div class="container">
+            <div class="countdown-wrapper">
+                <span class="countdown-title">LIVE COMEÇANDO EM:</span>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="countdown-hours">00</div>
+                        <div class="countdown-label">Horas</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="countdown-minutes">01</div>
+                        <div class="countdown-label">Minutos</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="countdown-seconds">56</div>
+                        <div class="countdown-label">Segundos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learn Section -->
+    <section class="learn-section" style="display: none;">
         <div class="container">
             <h2 class="section-title">O QUE VOCÊ VAI CLAREAR NESSE ENCONTRO?</h2>
 
@@ -111,7 +109,7 @@
 
             <ul class="learn-list">
                 <li>🎯 Por que postar com frequência não garante crescimento</li>
-                <li>🧠 Onde empresários mais erram ao tentar “fazer conteúdo certo”</li>
+                <li>🧠 Onde empresários mais erram ao tentar "fazer conteúdo certo"</li>
                 <li>📌 A diferença entre produzir conteúdo e ter intenção clara</li>
                 <li>⚠️ Por que esforço alto não significa retorno alto</li>
                 <li>⏱️ Como sair do improviso sem viver dentro do Instagram</li>
@@ -120,7 +118,7 @@
         </div>
     </section>
 
-    <!-- Quem deve participar -->
+    <!-- Who Should Participate -->
     <section class="who-section" style="display: none;">
         <div class="container">
             <h2 class="section-title">QUEM FAZ SENTIDO ESTAR NESSE ENCONTRO?</h2>
@@ -167,11 +165,11 @@
                 </div>
             </div>
 
-            <button class="btn-cta-secondary" onclick="openFormModal()">👉 Quero ter essa clareza</button>
+            <button class="btn-cta-secondary" onclick="scrollToForm()">👉 Quero ter essa clareza</button>
         </div>
     </section>
 
-    <!-- Author Section -->
+    <!-- Author Section - Layout lado a lado -->
     <section class="author-section">
         <div class="container">
             <div class="author-content">
@@ -179,7 +177,7 @@
                     <img src="images/joao_foto_010k.jpeg" alt="João Viral" class="author-image">
                 </div>
                 <div class="author-info">
-                    <h2 class="author-title">OLÁ, EU SOU JOÃO VIRAL.</h2>
+                    <h2 class="author-title">OLÁ, EU SOU <span class="author-title-highlight">JOÃO VIRAL</span></h2>
 
                     <p class="author-text">
                         Eu também já postei sem entender por que alguns conteúdos funcionavam e outros não.
@@ -249,46 +247,21 @@
             const SUPABASE_URL = 'https://ttzgmysucadmcfjulpbj.supabase.co';
             const SUPABASE_ANON_KEY = 'sb_publishable__ZjzsgvsMc825HGkRUZ3cQ_KcPiKPZ7';
             
-            console.log('🔧 Inicializando Supabase...');
-            console.log('URL:', SUPABASE_URL);
-            
             function criarClienteSupabase() {
-                console.log('Tentando criar cliente Supabase...');
-                console.log('window.supabase existe?', typeof window.supabase !== 'undefined');
-                console.log('window.supabase.createClient existe?', typeof window.supabase?.createClient === 'function');
-                
                 if (window.supabase && typeof window.supabase.createClient === 'function') {
-                    try {
-                        window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                        console.log('✅ Cliente Supabase criado com sucesso!');
-                        console.log('Cliente:', window.supabaseClient);
-                        return true;
-                    } catch (error) {
-                        console.error('❌ Erro ao criar cliente:', error);
-                        return false;
-                    }
+                    window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    console.log('✅ Cliente Supabase criado com sucesso!');
+                    return true;
                 }
                 return false;
             }
             
             // Tentar criar imediatamente
             if (!criarClienteSupabase()) {
-                console.log('⚠️ Cliente não criado imediatamente, tentando após delays...');
                 // Se não funcionar, tentar após delays
-                setTimeout(() => {
-                    console.log('Tentativa 1 (500ms)...');
-                    criarClienteSupabase();
-                }, 500);
-                setTimeout(() => {
-                    console.log('Tentativa 2 (1500ms)...');
-                    criarClienteSupabase();
-                }, 1500);
-                setTimeout(() => {
-                    console.log('Tentativa 3 (3000ms)...');
-                    if (!criarClienteSupabase()) {
-                        console.error('❌ Não foi possível criar o cliente Supabase após todas as tentativas');
-                    }
-                }, 3000);
+                setTimeout(criarClienteSupabase, 500);
+                setTimeout(criarClienteSupabase, 1500);
+                setTimeout(criarClienteSupabase, 3000);
             }
         })();
     </script>
