@@ -11,7 +11,7 @@ if (window.__scriptGiovanniLoaded) {
 async function trySaveToSupabase(nome, telefone) {
     console.log('=== TENTANDO SALVAR NO SUPABASE ===');
     console.log('Dados:', { nome, telefone });
-    console.log('Nome da tabela: interesse_0a10k');
+    console.log('Nome da tabela: captura_joaoviral_01');
     
     // Verificar se o Supabase está disponível
     if (!window.supabase) {
@@ -34,8 +34,8 @@ async function trySaveToSupabase(nome, telefone) {
         for (let i = 0; i < 5; i++) {
             await new Promise(resolve => setTimeout(resolve, 500));
             if (window.supabase && typeof window.supabase.createClient === 'function') {
-                const SUPABASE_URL = 'https://ttzgmysucadmcfjulpbj.supabase.co';
-                const SUPABASE_ANON_KEY = 'sb_publishable__ZjzsgvsMc825HGkRUZ3cQ_KcPiKPZ7';
+                const SUPABASE_URL = 'https://ilyrnvvaadcdxtfrgsmw.supabase.co';
+                const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlseXJudnZhYWRjZHh0ZnJnc213Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2NTAzODQsImV4cCI6MjA4NjIyNjM4NH0.WSnVh37DBFWrxBADGxMr9QO-l8r3YN2X17Ip52Gwyws';
                 clienteFinal = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                 window.supabaseClient = clienteFinal;
                 console.log('✅ Cliente criado na tentativa', i + 1);
@@ -50,11 +50,11 @@ async function trySaveToSupabase(nome, telefone) {
     }
     
     console.log('Enviando dados para Supabase...');
-    console.log('Tabela: interesse_0a10k');
+    console.log('Tabela: captura_joaoviral_01');
     console.log('Payload:', { nome, telefone });
     
     const { data, error } = await clienteFinal
-        .from('interesse_0a10k')
+        .from('captura_joaoviral_01')
         .insert([{ nome, telefone }]);
     
     if (error) {
