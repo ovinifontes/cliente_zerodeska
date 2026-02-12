@@ -77,6 +77,45 @@ async function trySaveToSupabase(nome, telefone) {
     return data;
 }
 
+// Enviar webhook após salvar no Supabase
+async function sendWebhook(nome, telefone, site) {
+    const webhookUrl = 'https://0a10k-n8n-web.tk2vyh.easypanel.host/webhook/captura_cadastro_webnario_joaoviral';
+    
+    try {
+        console.log('=== ENVIANDO WEBHOOK ===');
+        console.log('URL:', webhookUrl);
+        console.log('Dados:', { nome, telefone, site });
+        
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nome: nome,
+                telefone: telefone,
+                site: site
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Webhook retornou status ${response.status}`);
+        }
+        
+        const responseData = await response.json().catch(() => ({}));
+        console.log('✅✅✅ WEBHOOK ENVIADO COM SUCESSO!');
+        console.log('Resposta:', responseData);
+        
+        return responseData;
+    } catch (error) {
+        console.error('❌ ERRO ao enviar webhook:');
+        console.error('Erro:', error);
+        // Não lançar erro para não interromper o fluxo do usuário
+        // O webhook é secundário, o importante é que os dados foram salvos no Supabase
+        return null;
+    }
+}
+
 // Máscara de telefone brasileira
 function maskPhone(value) {
     if (!value) return '';
@@ -184,6 +223,9 @@ async function processFormSubmission(nomeElementId, telefoneElementId, formEleme
         
         // Aguardar salvamento no Supabase antes de mostrar modal
         await trySaveToSupabase(nomeValue, telefoneFormatado);
+        
+        // Enviar webhook após salvar no Supabase
+        await sendWebhook(nomeValue, telefoneFormatado, 'joaoviral_interesse2');
         
         // Disparar evento de conversão do Meta Pixel
         if (typeof fbq !== 'undefined') {
