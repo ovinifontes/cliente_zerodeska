@@ -11,7 +11,7 @@ if (window.__scriptGiovanniLoaded) {
 async function trySaveToSupabase(nome, telefone) {
     console.log('=== TENTANDO SALVAR NO SUPABASE ===');
     console.log('Dados:', { nome, telefone });
-    console.log('Nome da tabela: captura_joaoviral_01');
+    console.log('Nome da tabela: captura_joaoviral_02');
     
     // Verificar se o Supabase está disponível
     if (!window.supabase) {
@@ -50,11 +50,11 @@ async function trySaveToSupabase(nome, telefone) {
     }
     
     console.log('Enviando dados para Supabase...');
-    console.log('Tabela: captura_joaoviral_01');
+    console.log('Tabela: captura_joaoviral_02');
     console.log('Payload:', { nome, telefone });
     
     const { data, error } = await clienteFinal
-        .from('captura_joaoviral_01')
+        .from('captura_joaoviral_02')
         .insert([{ nome, telefone }]);
     
     if (error) {
